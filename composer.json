@@ -2,13 +2,15 @@
     "name": "mocking-magician/moneysaurus",
     "type": "library",
     "description": "Money change library. A Solution for change-making problem.",
+    "homepage": "https://github.com/MockingMagician/moneysaurus",
     "keywords": [
         "money", "change", "Change-Making Problem"
     ],
     "authors": [
         {
             "name": "Marc MOREAU",
-            "email": "moreau.marc.web@gmail.com"
+            "email": "moreau.marc.web@gmail.com",
+            "role": "Developer"
         }
     ],
     "autoload": {
