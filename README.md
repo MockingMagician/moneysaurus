@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master.svg?style=svg)](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master)
+
 # Description
 
 Moneysaurus is a PHP library for the change-making problem.
