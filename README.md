@@ -22,7 +22,7 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\Algorithms\GreedyAlgorithm;
 
 // There, you can see an example with the Euro currency system 
-$system = new System([
+$system = new System(...[
     0.01, 
     0.02, 
     0.05, 

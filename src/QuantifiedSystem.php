@@ -27,9 +27,17 @@ class QuantifiedSystem
 
         $this->system = $system;
 
-        foreach ($this->system as $v) {
+        foreach ($this->system->getValues() as $v) {
             $this->setQuantity($v, 0);
         }
+    }
+
+    public function __debugInfo()
+    {
+        return [
+            'system' => $this->system->__debugInfo(),
+            'quantities' => $this->quantities,
+        ];
     }
 
     /**

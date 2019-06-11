@@ -29,7 +29,7 @@ class GreedyAlgorithm
         $change = new QuantifiedSystem();
 
         $values = $this->system->getValues();
-        $values = arsort($values);
+        arsort($values);
 
         foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);

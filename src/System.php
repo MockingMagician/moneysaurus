@@ -15,6 +15,13 @@ class System
         $this->values = $values;
     }
 
+    public function __debugInfo()
+    {
+        return [
+            'values' => $this->getValues(),
+        ];
+    }
+
     /**
      * @param float $value
      *
