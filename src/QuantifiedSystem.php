@@ -32,12 +32,23 @@ class QuantifiedSystem
         }
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __debugInfo()
     {
         return [
             'system' => $this->system->__debugInfo(),
             'quantities' => $this->quantities,
         ];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return json_encode($this->__debugInfo());
     }
 
     /**

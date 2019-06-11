@@ -22,7 +22,7 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\Algorithms\GreedyAlgorithm;
 
 // There, you can see an example with the Euro currency system 
-$system = new System(...[
+$euroSystem = new System(...[
     0.01, 
     0.02, 
     0.05, 
@@ -43,7 +43,7 @@ $system = new System(...[
 // Then initialize a quantified system.
 // A quantified system, is a system with a defined quantity of each coin/bank note available.
 
-$quantifiedSystem = new QuantifiedSystem($system);
+$quantifiedSystem = new QuantifiedSystem($euroSystem);
 // By default, each value has been initialized with an zero amount quantity value.
 // So after you can set the available quantity for each coin/bank note
 $quantifiedSystem->setQuantity(0.01,  50);

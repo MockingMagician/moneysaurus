@@ -15,11 +15,22 @@ class System
         $this->values = $values;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __debugInfo()
     {
         return [
             'values' => $this->getValues(),
         ];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return json_encode($this->__debugInfo());
     }
 
     /**

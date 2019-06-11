@@ -4,9 +4,10 @@ namespace MockingMagician\Moneysaurus\Algorithms;
 
 use MockingMagician\Moneysaurus\Execptions\ChangeAsLeftOver;
 use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
-class GreedyAlgorithm
+class GreedyAlgorithm implements ChangeInterface
 {
     /** @var QuantifiedSystem */
     private $system;
@@ -17,9 +18,27 @@ class GreedyAlgorithm
     }
 
     /**
+     * @codeCoverageIgnore
+     */
+    public function __debugInfo()
+    {
+        return [
+            'system' => $this->system->__debugInfo(),
+        ];
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        return json_encode($this->__debugInfo());
+    }
+
+    /**
      * @param float $amount
      *
-     * @throws \MockingMagician\Moneysaurus\Execptions\ValueNotExistException
+     * @throws ValueNotExistException
      * @throws ChangeAsLeftOver
      *
      * @return QuantifiedSystem
@@ -38,6 +57,12 @@ class GreedyAlgorithm
                     break;
                 }
                 $amount -= $value;
+                // this part prevent from php internal rounding after operate
+                $exp = explode('.', $amount);
+                $d = isset($exp[1]) ? $exp[1] : '';
+                $l = mb_strlen($d);
+                $amount = round($amount, $l);
+                // --- end of prevent ---
                 --$quantity;
 
                 try {
