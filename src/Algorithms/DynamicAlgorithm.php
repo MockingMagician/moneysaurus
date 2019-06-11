@@ -29,6 +29,7 @@ class DynamicAlgorithm implements ChangeInterface
     {
         return [
             'system' => $this->system->__debugInfo(),
+            'dynamicNode' => $this->dynamicNode,
         ];
     }
 
@@ -50,6 +51,8 @@ class DynamicAlgorithm implements ChangeInterface
     public function change(float $amount): QuantifiedSystem
     {
         $this->dynamicNode = new DynamicNode($this->system, $amount);
-        $this->dynamicNode->getMostEfficientChange();
+//        $this->dynamicNode->getMostEfficientChange();
+
+        return new QuantifiedSystem();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -55,7 +56,10 @@ class DynamicNode
      */
     private function createTree(): void
     {
-        foreach ($this->system->getValues() as $value) {
+        $values = $this->system->getValues();
+        arsort($values);
+
+        foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);
             if ($this->change - $value < 0 && $quantity > 0) {
                 $amount = $this->change - $value;
