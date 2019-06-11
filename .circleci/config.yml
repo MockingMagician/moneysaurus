@@ -22,6 +22,6 @@ jobs: # a collection of steps
           paths:
             - vendor
       - run: mkdir test-results
-      - run: make tests
       - store_test_results:
           path: test-results
+      - run: make tests
