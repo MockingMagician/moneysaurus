@@ -21,15 +21,20 @@ jobs: # a collection of steps
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
+      - run: mkdir -p ~/tests
       - run:
-          command: |
-            mkdir -p ~/phpunit
-            vendor/bin/phpunit --log-junit ~/phpunit/junit.xml tests
+          name: Phpunit
           when: always
+          command: make phpunit
+      - run:
+          name: PHP cs
+          when: always
+          command: make phpcs-check
+      - run:
+          name: PHP stan
+          when: always
+          command: make phpstan
       - store_test_results:
-          path: ~/phpunit
+          path: ~/tests
       - store_artifacts:
-          path: ~/phpunit
-      - store_test_results:
-          path: test-results
-      - run: make tests
+          path: ~/tests
