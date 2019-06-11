@@ -19,11 +19,12 @@
             "MockingMagician\\Moneysaurus\\": "src"
         }
     },
-    "require": {},
+    "require": {
+    },
     "require-dev": {
         "phpunit/phpunit": "^8",
-        "phpstan/phpstan": "^0.10.5",
-        "friendsofphp/php-cs-fixer": "^2.13",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpstan/phpstan": "@dev",
         "phpbench/phpbench": "@dev"
     }
 }
