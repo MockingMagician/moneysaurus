@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master.svg?style=svg)](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master)
+[![CircleCI](https://circleci.com/gh/MockingMagician/moneysaurus/tree/{{branch}}.svg?style=svg)](https://circleci.com/gh/MockingMagician/moneysaurus/tree/{{branch}})
 
 # Description
 
