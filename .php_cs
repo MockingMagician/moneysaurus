@@ -66,6 +66,14 @@ $config = PhpCsFixer\Config::create()
         'strict_param' => true,
         'string_line_ending' => true,
         'yoda_style' => true,
+        'header_comment' => [
+            'header' => implode("\n", [
+                '@author Marc MOREAU <moreau.marc.web@gmail.com>',
+                '@license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0',
+                '@link https://github.com/MockingMagician/moneysaurus/blob/master/README.md',
+            ]),
+            'comment_type' => 'PHPDoc',
+        ],
     ])
     ->setFinder($finder)
 ;

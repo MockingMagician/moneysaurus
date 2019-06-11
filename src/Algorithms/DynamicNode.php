@@ -2,6 +2,8 @@
 
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
+ * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
+ * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
 namespace MockingMagician\Moneysaurus\Algorithms;
@@ -29,6 +31,15 @@ class DynamicNode
         $this->system = $system;
         $this->change = $change;
         $this->createTree();
+    }
+
+    public function __debugInfo()
+    {
+        return [
+            'system' => $this->system,
+            'change' => $this->change,
+            'children' => $this->children,
+        ];
     }
 
     /**
@@ -65,14 +76,5 @@ class DynamicNode
     private function addChild(float $weight, self $node): void
     {
         $this->children[] = new DynamicNodeLink($weight, $node, $this);
-    }
-
-    public function __debugInfo()
-    {
-        return [
-            'system' => $this->system,
-            'change' => $this->change,
-            'children' => $this->children,
-        ];
     }
 }
