@@ -101,7 +101,7 @@ $change = $resolver->change(11.21);
 
 # What's next ?
 
-- [ ] Adding one global resolver object who can have multiple resolver algorithms
-- [ ] Creating an interface for system object recorder
+- [ ] Adding one global resolver object who can have multiple resolver algorithms.
+- [ ] Creating an interface for system object recorder.
 - [ ] Adding a deduce method into quantified system.
 
