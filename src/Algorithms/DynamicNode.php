@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -14,6 +13,7 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 class DynamicNode
 {
+    private static $hasFoundResult = false;
     private $system;
     private $change;
     /** @var DynamicNodeLink[] */
@@ -31,6 +31,11 @@ class DynamicNode
     {
         $this->system = $system;
         $this->change = $change;
+        if ($change <= 0) {
+            self::$hasFoundResult = true;
+
+            return;
+        }
         $this->createTree();
     }
 
@@ -60,8 +65,11 @@ class DynamicNode
         arsort($values);
 
         foreach ($values as $value) {
+            if (self::$hasFoundResult) {
+                break;
+            }
             $quantity = $this->system->getQuantity($value);
-            if ($this->change - $value < 0 && $quantity > 0) {
+            if ($this->change - $value >= 0 && $quantity > 0) {
                 $amount = $this->change - $value;
                 // this part prevent from php internal rounding after operate
                 $exp = explode('.', $amount);

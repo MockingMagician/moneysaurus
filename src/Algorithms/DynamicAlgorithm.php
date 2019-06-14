@@ -6,6 +6,15 @@
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
+declare(ticks=1);
+
+/**
+ * @author Marc MOREAU <moreau.marc.web@gmail.com>
+ * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
+ *
+ * @see https://github.com/MockingMagician/moneysaurus/blob/master/README.md
+ */
+
 namespace MockingMagician\Moneysaurus\Algorithms;
 
 use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
@@ -51,7 +60,6 @@ class DynamicAlgorithm implements ChangeInterface
     public function change(float $amount): QuantifiedSystem
     {
         $this->dynamicNode = new DynamicNode($this->system, $amount);
-//        $this->dynamicNode->getMostEfficientChange();
 
         return new QuantifiedSystem();
     }
