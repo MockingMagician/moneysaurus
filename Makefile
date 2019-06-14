@@ -4,7 +4,7 @@ bench: ## Run benchmarks
 	vendor/bin/phpbench run --report='generator: "table", break: ["benchmark", "revs"], cols: ["subject", "mean"]' --bootstrap='vendor/autoload.php' benchmarks
 
 phpunit: ## Launch PHPUnit test suite
-	vendor/bin/phpunit --colors=always --coverage-html _coverage -c phpunit.xml
+	vendor/bin/phpunit --colors=always --coverage-html .coverage -c phpunit.xml
 
 phpcs: ## Apply PHP CS fixes
 	vendor/bin/php-cs-fixer fix
