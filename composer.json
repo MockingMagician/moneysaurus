@@ -2,7 +2,7 @@
     "name": "mocking-magician/moneysaurus",
     "type": "library",
     "description": "Money change library. A Solution for change-making problem.",
-    "license": "Apache License 2.0",
+    "license": "Apache-2.0",
     "homepage": "https://github.com/MockingMagician/moneysaurus",
     "keywords": [
         "money", "change", "Change-Making Problem"
