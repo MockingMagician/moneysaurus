@@ -15,8 +15,14 @@
         }
     ],
     "autoload": {
+        "files": ["src/functions.php"],
         "psr-4": {
             "MockingMagician\\Moneysaurus\\": "src"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "7.1.0"
         }
     },
     "require": {

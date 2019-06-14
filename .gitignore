@@ -1,5 +1,4 @@
 /vendor/
-/_coverage/
 /.*
 !/.gitignore
 !/.php_cs

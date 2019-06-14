@@ -13,7 +13,7 @@ use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
 
 class QuantifiedSystem
 {
-    /** @var float[] */
+    /** @var int[] */
     private $quantities = [];
     /** @var System */
     private $system;
@@ -54,7 +54,9 @@ class QuantifiedSystem
      */
     public function __toString()
     {
-        return json_encode($this->__debugInfo());
+        $string = json_encode($this->__debugInfo());
+
+        return $string ? $string : '';
     }
 
     /**
