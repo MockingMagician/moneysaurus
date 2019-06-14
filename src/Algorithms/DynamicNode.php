@@ -9,14 +9,19 @@
 namespace MockingMagician\Moneysaurus\Algorithms;
 
 use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 class DynamicNode
 {
-    private static $hasFoundResult = false;
+    /** @var bool */
+    private $nextAsRun = false;
+    /** @var ?DynamicNode */
+    private $successOnChild;
     private $system;
     private $change;
-    /** @var DynamicNodeLink[] */
+    private $parent;
+    /** @var DynamicNode[] */
     private $children = [];
 
     /**
@@ -24,19 +29,13 @@ class DynamicNode
      *
      * @param QuantifiedSystem $system
      * @param float            $change
-     *
-     * @throws ValueNotExistException
+     * @param null|DynamicNode $parent
      */
-    public function __construct(QuantifiedSystem $system, float $change)
+    public function __construct(QuantifiedSystem $system, float $change, ?self $parent = null)
     {
         $this->system = $system;
         $this->change = $change;
-        if ($change <= 0) {
-            self::$hasFoundResult = true;
-
-            return;
-        }
-        $this->createTree();
+        $this->parent = $parent;
     }
 
     public function __debugInfo()
@@ -49,7 +48,39 @@ class DynamicNode
     }
 
     /**
-     * @return DynamicNodeLink[]
+     * @return QuantifiedSystem
+     */
+    public function getSystem(): QuantifiedSystem
+    {
+        return $this->system;
+    }
+
+    /**
+     * @return float
+     */
+    public function getChange(): float
+    {
+        return $this->change;
+    }
+
+    /**
+     * @return DynamicNode
+     */
+    public function getParent(): self
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLastDeduce(): float
+    {
+        return $this->lastDeduce;
+    }
+
+    /**
+     * @return DynamicNode[]
      */
     public function getChildren(): array
     {
@@ -59,34 +90,45 @@ class DynamicNode
     /**
      * @throws ValueNotExistException
      */
-    private function createTree(): void
+    public function nextChildren(): void
     {
+        if ($this->nextAsRun) {
+            return;
+        }
+
         $values = $this->system->getValues();
         arsort($values);
 
         foreach ($values as $value) {
-            if (self::$hasFoundResult) {
-                break;
-            }
             $quantity = $this->system->getQuantity($value);
             if ($this->change - $value >= 0 && $quantity > 0) {
-                $amount = $this->change - $value;
-                // this part prevent from php internal rounding after operate
-                $exp = explode('.', $amount);
-                $d = isset($exp[1]) ? $exp[1] : '';
-                $l = mb_strlen($d);
-                $amount = round($amount, $l);
-                // --- end of prevent ---
+                $amount = preventFromPhpInternalRoundingAfterOperate($this->change, $value);
                 --$quantity;
                 $system = clone $this->system;
                 $system->setQuantity($value, $quantity);
-                $this->addChild($value, new self($system, $amount));
+                $node = new self($system, $amount, $this);
+                $this->addChild($node);
+                if (0 === $amount) {
+                    $this->successOnChild = $node;
+
+                    break;
+                }
             }
         }
+
+        $this->nextAsRun = true;
     }
 
-    private function addChild(float $weight, self $node): void
+    /**
+     * @return DynamicNode
+     */
+    public function getSuccessOnChild(): ?self
     {
-        $this->children[] = new DynamicNodeLink($weight, $node, $this);
+        return $this->successOnChild;
+    }
+
+    private function addChild(self $node): void
+    {
+        $this->children[] = $node;
     }
 }

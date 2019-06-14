@@ -47,7 +47,9 @@ class DynamicAlgorithm implements ChangeInterface
      */
     public function __toString()
     {
-        return json_encode($this->__debugInfo());
+        $string = json_encode($this->__debugInfo());
+
+        return $string ? $string : '';
     }
 
     /**
@@ -59,7 +61,7 @@ class DynamicAlgorithm implements ChangeInterface
      */
     public function change(float $amount): QuantifiedSystem
     {
-        $this->dynamicNode = new DynamicNode($this->system, $amount);
+        $this->dynamicNode = new DynamicRootNode($this->system, $amount);
 
         return new QuantifiedSystem();
     }

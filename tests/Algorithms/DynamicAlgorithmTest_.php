@@ -12,11 +12,6 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
 
 /**
- * @author Marc MOREAU <moreau.marc.web@gmail.com>
- * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
- *
- * @see https://github.com/MockingMagician/moneysaurus/blob/master/README.md
- *
  * @internal
  */
 final class DynamicAlgorithmTest extends PHPUnit\Framework\TestCase
