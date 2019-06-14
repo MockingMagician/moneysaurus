@@ -36,7 +36,9 @@ class System
      */
     public function __toString()
     {
-        return json_encode($this->__debugInfo());
+        $string = json_encode($this->__debugInfo());
+
+        return $string ? $string : '';
     }
 
     /**
