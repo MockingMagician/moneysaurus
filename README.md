@@ -1,4 +1,8 @@
-[![CircleCI](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master.svg?style=svg)](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master)
+[![Build Status](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master.svg?style=shield)](https://circleci.com/gh/MockingMagician/moneysaurus/tree/master)
+[![Latest Stable Version](https://poser.pugx.org/mocking-magician/moneysaurus/v/stable)](https://packagist.org/packages/mocking-magician/moneysaurus)
+[![Total Downloads](https://poser.pugx.org/mocking-magician/moneysaurus/downloads)](https://packagist.org/packages/mocking-magician/moneysaurus)
+[![License](https://poser.pugx.org/mocking-magician/moneysaurus/license)](https://packagist.org/packages/mocking-magician/moneysaurus)
+[![composer.lock](https://poser.pugx.org/mocking-magician/moneysaurus/composerlock)](https://packagist.org/packages/mocking-magician/moneysaurus)
 
 # Description
 
@@ -10,9 +14,12 @@ This library works for every currency. Just start by defining a system. A system
 
 # Install
 
-Simply run `composer require mocking-magician/moneysaurus`
+Simply run 
+````bash
+composer require mocking-magician/moneysaurus
+````
 
-# Use examples
+# Examples
 
 You can just start by creating a system
 
