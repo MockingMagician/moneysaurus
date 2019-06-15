@@ -89,7 +89,7 @@ class DynamicNode
         }
 
         $values = $this->system->getValues();
-        \arsort($values);
+        arsort($values);
 
         foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);

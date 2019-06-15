@@ -13,13 +13,21 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 class DynamicAlgorithm implements ChangeInterface
 {
+    /** @var int */
+    const DEFAULT_TIME = 10;
+
     private $system;
     /** @var DynamicRootNode */
     private $dynamicRootNode;
+    /**
+     * @var int
+     */
+    private $maxThinkingTime;
 
-    public function __construct(QuantifiedSystem $system)
+    public function __construct(QuantifiedSystem $system, int $maxThinkingTime = self::DEFAULT_TIME)
     {
         $this->system = $system;
+        $this->maxThinkingTime = $maxThinkingTime;
     }
 
     /**
@@ -52,10 +60,19 @@ class DynamicAlgorithm implements ChangeInterface
      */
     public function change(float $amount): QuantifiedSystem
     {
+        $startTime = time();
+
         $this->dynamicRootNode = new DynamicRootNode($this->system, $amount);
 
-        while (is_null($this->dynamicRootNode->getSuccessOnChildren())) {
+        while (null === $this->dynamicRootNode->getSuccessOnChildren()) {
             $this->dynamicRootNode->nextRow();
+            var_dump(\count($this->dynamicRootNode->getLastRow()));
+            if ($startTime + self::DEFAULT_TIME > $this->maxThinkingTime) {
+                die;
+            }
+            if (\count($this->dynamicRootNode->getLastRow()) > 10000) {
+                die();
+            }
         }
 
         return new QuantifiedSystem();

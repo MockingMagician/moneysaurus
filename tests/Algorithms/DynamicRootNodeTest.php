@@ -1,12 +1,21 @@
 <?php
 
+/**
+ * @author Marc MOREAU <moreau.marc.web@gmail.com>
+ * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
+ * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
+ */
+
 use MockingMagician\Moneysaurus\Algorithms\DynamicRootNode;
 use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
 use PHPUnit\Framework\TestCase;
 
-class DynamicRootNodeTest extends TestCase
+/**
+ * @internal
+ */
+final class DynamicRootNodeTest extends TestCase
 {
     /** @var DynamicRootNode */
     private $dynamicRootNode;
@@ -32,6 +41,8 @@ class DynamicRootNodeTest extends TestCase
         $this->quantifiedSystem->setQuantity(1, 5);
         $this->quantifiedSystem->setQuantity(2, 5);
         $this->quantifiedSystem->setQuantity(5, 5);
+        $this->quantifiedSystem->setQuantity(50, 5);
+        $this->quantifiedSystem->setQuantity(100, 5);
 
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 7);
     }
@@ -59,7 +70,7 @@ class DynamicRootNodeTest extends TestCase
 
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 16.52);
 
-        while (is_null($this->dynamicRootNode->getSuccessOnChildren())) {
+        while (null === $this->dynamicRootNode->getSuccessOnChildren()) {
             $this->dynamicRootNode->nextRow();
         }
         $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
