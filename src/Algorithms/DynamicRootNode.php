@@ -45,4 +45,17 @@ class DynamicRootNode extends DynamicNode
 
         $this->lastRow = $lastRow;
     }
+
+    public function getSuccessOnChildren(): ?DynamicNode
+    {
+        return $this->successOnChildren;
+    }
+
+    /**
+     * @return DynamicNode[]
+     */
+    public function getLastRow(): array
+    {
+        return $this->lastRow;
+    }
 }

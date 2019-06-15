@@ -72,14 +72,6 @@ class DynamicNode
     }
 
     /**
-     * @return float
-     */
-    public function getLastDeduce(): float
-    {
-        return $this->lastDeduce;
-    }
-
-    /**
      * @return DynamicNode[]
      */
     public function getChildren(): array
@@ -97,18 +89,18 @@ class DynamicNode
         }
 
         $values = $this->system->getValues();
-        arsort($values);
+        \arsort($values);
 
         foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);
-            if ($this->change - $value >= 0 && $quantity > 0) {
+            if ($this->change - $value >= 0.0 && $quantity > 0) {
                 $amount = preventFromPhpInternalRoundingAfterOperate($this->change, $value);
                 --$quantity;
                 $system = clone $this->system;
                 $system->setQuantity($value, $quantity);
                 $node = new self($system, $amount, $this);
                 $this->addChild($node);
-                if (0 === $amount) {
+                if (0.0 === $amount) {
                     $this->successOnChild = $node;
 
                     break;
