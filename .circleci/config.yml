@@ -23,6 +23,7 @@ jobs: # a collection of steps
             - vendor
       - run: mkdir -p ./tests-results
       - run: mkdir -p ./tests-results/coverage
+      - run: mkdir -p ./tests-results/phpcs
       - run:
           name: Phpunit
           when: always
@@ -30,7 +31,7 @@ jobs: # a collection of steps
       - run:
           name: PHP cs
           when: always
-          command: make phpcs-check
+          command: make phpcs-junit-circle-ci
       - run:
           name: PHP stan
           when: always
