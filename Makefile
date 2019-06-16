@@ -19,7 +19,7 @@ phpunit-junit-log-circle-ci: ##  Launch PHPUnit test suite with --log-junit and 
 	vendor/bin/phpunit --colors=always --log-junit tests-results/tests.xml --coverage-xml tests-results/coverage -c phpunit.xml
 
 phpcs-junit-circle-ci: ## Apply PHP CS fixes
-	vendor/bin/php-cs-fixer fix --format=junit tests-results/phpcs
+	vendor/bin/php-cs-fixer fix --format=junit >> tests-results/phpcs/code_style.xml
 
 help: ## Display this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
