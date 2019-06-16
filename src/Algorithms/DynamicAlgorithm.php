@@ -57,10 +57,11 @@ class DynamicAlgorithm implements ChangeInterface
     /**
      * @param float $amount
      *
-     * @return QuantifiedSystem
      * @throws MaxWorkingTimeException
      * @throws ValueNotExistException
      * @throws DuplicateValueException
+     *
+     * @return QuantifiedSystem
      */
     public function change(float $amount): QuantifiedSystem
     {
@@ -68,7 +69,7 @@ class DynamicAlgorithm implements ChangeInterface
 
         $this->dynamicRootNode = new DynamicRootNode($this->system, $amount);
 
-        while (null === $this->dynamicRootNode->getSuccessOnChildren()) {
+        while (null === ($node = $this->dynamicRootNode->getSuccessOnChildren())) {
             $this->dynamicRootNode->nextRow();
             if (time() - $startTime > $this->maxWorkingTime) {
                 throw new MaxWorkingTimeException($this->maxWorkingTime);
@@ -76,13 +77,8 @@ class DynamicAlgorithm implements ChangeInterface
         }
 
         $change = new QuantifiedSystem();
-        $node = $this->dynamicRootNode->getSuccessOnChildren();
 
-        do {
-            $parent = $node->getParent();
-            if (is_null($parent)) {
-                break;
-            }
+        while (null !== $node && $parent = $node->getParent()) {
             $amount = preventFromPhpInternalRoundingAfterOperate($parent->getChange(), $node->getChange());
 
             try {
@@ -91,7 +87,8 @@ class DynamicAlgorithm implements ChangeInterface
             } catch (ValueNotExistException $exception) {
                 $change->addValue($amount, 1);
             }
-        } while ($node = $node->getParent());
+            $node = $parent;
+        }
 
         return $change;
     }

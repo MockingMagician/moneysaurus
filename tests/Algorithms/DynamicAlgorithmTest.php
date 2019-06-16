@@ -72,13 +72,13 @@ final class DynamicAlgorithmTest extends PHPUnit\Framework\TestCase
     {
         $this->quantifiedSystem = new QuantifiedSystem($this->euroSystem);
         $this->quantifiedSystem->setQuantity(0.05, 3);
-        $this->quantifiedSystem->setQuantity(0.2,  3);
-        $this->quantifiedSystem->setQuantity(0.5,  3);
-        $this->quantifiedSystem->setQuantity(1,    3);
-        $this->quantifiedSystem->setQuantity(2,    3);
-        $this->quantifiedSystem->setQuantity(5,    3);
-        $this->quantifiedSystem->setQuantity(50,   3);
-        $this->quantifiedSystem->setQuantity(100,  3);
+        $this->quantifiedSystem->setQuantity(0.2, 3);
+        $this->quantifiedSystem->setQuantity(0.5, 3);
+        $this->quantifiedSystem->setQuantity(1, 3);
+        $this->quantifiedSystem->setQuantity(2, 3);
+        $this->quantifiedSystem->setQuantity(5, 3);
+        $this->quantifiedSystem->setQuantity(50, 3);
+        $this->quantifiedSystem->setQuantity(100, 3);
 
         $this->expectException(MaxWorkingTimeException::class);
 
