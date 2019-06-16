@@ -55,18 +55,12 @@ class DynamicNode
         return $this->system;
     }
 
-    /**
-     * @return float
-     */
     public function getChange(): float
     {
         return $this->change;
     }
 
-    /**
-     * @return DynamicNode
-     */
-    public function getParent(): self
+    public function getParent(): ?self
     {
         return $this->parent;
     }
@@ -111,9 +105,6 @@ class DynamicNode
         $this->nextAsRun = true;
     }
 
-    /**
-     * @return DynamicNode
-     */
     public function getSuccessOnChild(): ?self
     {
         return $this->successOnChild;

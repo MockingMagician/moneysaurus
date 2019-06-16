@@ -8,7 +8,10 @@
 
 namespace MockingMagician\Moneysaurus\Algorithms;
 
+use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Execptions\MaxWorkingTimeException;
 use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 class DynamicAlgorithm implements ChangeInterface
@@ -22,12 +25,12 @@ class DynamicAlgorithm implements ChangeInterface
     /**
      * @var int
      */
-    private $maxThinkingTime;
+    private $maxWorkingTime;
 
-    public function __construct(QuantifiedSystem $system, int $maxThinkingTime = self::DEFAULT_TIME)
+    public function __construct(QuantifiedSystem $system, int $maxWorkingTime = self::DEFAULT_TIME)
     {
         $this->system = $system;
-        $this->maxThinkingTime = $maxThinkingTime;
+        $this->maxWorkingTime = $maxWorkingTime;
     }
 
     /**
@@ -54,9 +57,10 @@ class DynamicAlgorithm implements ChangeInterface
     /**
      * @param float $amount
      *
-     * @throws ValueNotExistException
-     *
      * @return QuantifiedSystem
+     * @throws MaxWorkingTimeException
+     * @throws ValueNotExistException
+     * @throws DuplicateValueException
      */
     public function change(float $amount): QuantifiedSystem
     {
@@ -66,15 +70,29 @@ class DynamicAlgorithm implements ChangeInterface
 
         while (null === $this->dynamicRootNode->getSuccessOnChildren()) {
             $this->dynamicRootNode->nextRow();
-            var_dump(\count($this->dynamicRootNode->getLastRow()));
-            if ($startTime + self::DEFAULT_TIME > $this->maxThinkingTime) {
-                die;
-            }
-            if (\count($this->dynamicRootNode->getLastRow()) > 10000) {
-                die();
+            if (time() - $startTime > $this->maxWorkingTime) {
+                throw new MaxWorkingTimeException($this->maxWorkingTime);
             }
         }
 
-        return new QuantifiedSystem();
+        $change = new QuantifiedSystem();
+        $node = $this->dynamicRootNode->getSuccessOnChildren();
+
+        do {
+            $parent = $node->getParent();
+            if (is_null($parent)) {
+                break;
+            }
+            $amount = preventFromPhpInternalRoundingAfterOperate($parent->getChange(), $node->getChange());
+
+            try {
+                $quantity = $change->getQuantity($amount);
+                $change->setQuantity($amount, $quantity + 1);
+            } catch (ValueNotExistException $exception) {
+                $change->addValue($amount, 1);
+            }
+        } while ($node = $node->getParent());
+
+        return $change;
     }
 }
