@@ -14,6 +14,15 @@ use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
 use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
+/**
+ * Class DynamicAlgorithm
+ *
+ * Dynamic algorithm is polynomial so it can consume lot of memory and time
+ * A max working time default value is set to 10 sec
+ * It is not recommended to use this algorithm
+ * It is better to use Greedy algorithm for canonical money
+ * Or if you not sure about canonical for your money system use...
+ */
 class DynamicAlgorithm implements ChangeInterface
 {
     /** @var int */
