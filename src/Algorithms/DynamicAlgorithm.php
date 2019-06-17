@@ -8,14 +8,15 @@
 
 namespace MockingMagician\Moneysaurus\Algorithms;
 
-use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
-use MockingMagician\Moneysaurus\Execptions\MaxWorkingTimeException;
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Algorithms\Dynamic\DynamicRootNode;
+use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\MaxWorkingTimeException;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 /**
- * Class DynamicAlgorithm
+ * Class DynamicAlgorithm.
  *
  * Dynamic algorithm is polynomial so it can consume lot of memory and time
  * A max working time default value is set to 10 sec

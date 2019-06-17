@@ -7,9 +7,9 @@
  */
 
 use MockingMagician\Moneysaurus\Algorithms\GreedyAlgorithm;
-use MockingMagician\Moneysaurus\Execptions\ChangeAsLeftOver;
-use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Exceptions\ChangeAsLeftOver;
+use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
 use PHPUnit\Framework\TestCase;

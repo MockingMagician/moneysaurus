@@ -6,8 +6,8 @@
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
-use MockingMagician\Moneysaurus\Algorithms\DynamicRootNode;
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Algorithms\Dynamic\DynamicRootNode;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
 use PHPUnit\Framework\TestCase;

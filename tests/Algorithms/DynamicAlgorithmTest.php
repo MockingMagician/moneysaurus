@@ -7,9 +7,9 @@
  */
 
 use MockingMagician\Moneysaurus\Algorithms\DynamicAlgorithm;
-use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
-use MockingMagician\Moneysaurus\Execptions\MaxWorkingTimeException;
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\MaxWorkingTimeException;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
 

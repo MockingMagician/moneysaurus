@@ -6,9 +6,9 @@
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
-namespace MockingMagician\Moneysaurus\Algorithms;
+namespace MockingMagician\Moneysaurus\Algorithms\Dynamic;
 
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 

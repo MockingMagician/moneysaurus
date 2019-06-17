@@ -8,8 +8,8 @@
 
 namespace MockingMagician\Moneysaurus;
 
-use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 
 class QuantifiedSystem
 {

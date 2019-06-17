@@ -6,7 +6,7 @@
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
-namespace MockingMagician\Moneysaurus\Execptions;
+namespace MockingMagician\Moneysaurus\Exceptions;
 
 use Throwable;
 

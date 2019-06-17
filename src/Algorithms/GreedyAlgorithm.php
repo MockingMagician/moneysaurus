@@ -8,9 +8,9 @@
 
 namespace MockingMagician\Moneysaurus\Algorithms;
 
-use MockingMagician\Moneysaurus\Execptions\ChangeAsLeftOver;
-use MockingMagician\Moneysaurus\Execptions\DuplicateValueException;
-use MockingMagician\Moneysaurus\Execptions\ValueNotExistException;
+use MockingMagician\Moneysaurus\Exceptions\ChangeAsLeftOver;
+use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
