@@ -21,6 +21,7 @@ class System
     public function __construct(float ...$values)
     {
         $this->values = $values;
+        rsort($this->values);
     }
 
     /**
@@ -56,6 +57,7 @@ class System
             throw new DuplicateValueException($value);
         }
         $this->values[] = $value;
+        rsort($this->values);
 
         return $this;
     }

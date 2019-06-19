@@ -44,39 +44,56 @@ class Couple
         return $this->quantity;
     }
 
-    public function increment()
+    public function setQuantity(int $quantity): self
+    {
+        $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function increment(): self
     {
         ++$this->quantity;
+
+        return $this;
     }
 
     /**
      * @throws NegativeQuantityException
      */
-    public function decrement()
+    public function decrement(): self
     {
         if (0 > $this->quantity - 1) {
             throw new NegativeQuantityException(-1);
         }
 
         --$this->quantity;
+
+        return $this;
     }
 
     public function plus(int $quantity)
     {
         $this->quantity += $quantity;
+
+        return $this;
     }
 
     /**
      * @param int $quantity
      *
      * @throws NegativeQuantityException
+     *
+     * @return Couple
      */
-    public function minus(int $quantity)
+    public function minus(int $quantity): self
     {
         if (0 > $this->quantity - $quantity) {
             throw new NegativeQuantityException($this->quantity - $quantity);
         }
 
         $this->quantity -= $quantity;
+
+        return $this;
     }
 }

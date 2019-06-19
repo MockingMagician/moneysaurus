@@ -9,32 +9,29 @@
 namespace MockingMagician\Moneysaurus;
 
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 
 class QuantifiedSystem
 {
-    /** @var int[] */
-    private $quantities = [];
-    /** @var System */
-    private $system;
+    /** @var Couple[] */
+    private $couples = [];
 
     /**
      * QuantifiedSystem constructor.
      *
      * @param null|System $system
      *
-     * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     public function __construct(?System $system = null)
     {
         if (null === $system) {
-            $system = new System();
+            return;
         }
 
-        $this->system = $system;
-
-        foreach ($this->system->getValues() as $v) {
-            $this->setQuantity($v, 0);
+        foreach ($system->getValues() as $v) {
+            $this->couples[] = new Couple($v);
         }
     }
 
@@ -44,8 +41,7 @@ class QuantifiedSystem
     public function __debugInfo()
     {
         return [
-            'system' => $this->system->__debugInfo(),
-            'quantities' => $this->quantities,
+            'couples' => $this->couples,
         ];
     }
 
@@ -69,11 +65,7 @@ class QuantifiedSystem
      */
     public function setQuantity(float $value, int $quantity): self
     {
-        if (false === ($k = array_search($value, $this->system->getValues(), true))) {
-            throw new ValueNotExistException($value);
-        }
-
-        $this->quantities[$k] = $quantity;
+        $this->getCouple($value)->setQuantity($quantity);
 
         return $this;
     }
@@ -87,11 +79,7 @@ class QuantifiedSystem
      */
     public function getQuantity(float $value): int
     {
-        if (false === ($k = array_search($value, $this->system->getValues(), true))) {
-            throw new ValueNotExistException($value);
-        }
-
-        return $this->quantities[$k];
+        return $this->getCouple($value)->getQuantity();
     }
 
     /**
@@ -100,13 +88,16 @@ class QuantifiedSystem
      *
      * @throws DuplicateValueException
      * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      *
      * @return QuantifiedSystem
      */
     public function addValue(float $value, int $quantity): self
     {
-        $this->system->addValue($value);
-        $this->setQuantity($value, $quantity);
+        if (null !== $this->getCouple($value)) {
+            throw new DuplicateValueException($value);
+        }
+        $this->couples[] = new Couple($value, $quantity);
 
         return $this;
     }
@@ -120,11 +111,8 @@ class QuantifiedSystem
      */
     public function removeValue(float $value): self
     {
-        if (false === ($k = array_search($value, $this->system->getValues(), true))) {
-            throw new ValueNotExistException($value);
-        }
-        $this->system->removeValue($value);
-        unset($this->quantities[$k]);
+        $key = $this->getKeyCouple($value);
+        unset($this->couples[$key]);
 
         return $this;
     }
@@ -134,6 +122,41 @@ class QuantifiedSystem
      */
     public function getValues(): array
     {
-        return $this->system->getValues();
+        $values = [];
+        foreach ($this->couples as $couple) {
+            $values[] = $couple->getValue();
+        }
+
+        return $values;
+    }
+
+    /**
+     * @param float $value
+     *
+     * @throws ValueNotExistException
+     *
+     * @return Couple
+     */
+    private function getCouple(float $value): Couple
+    {
+        return $this->couples[$this->getKeyCouple($value)];
+    }
+
+    /**
+     * @param float $value
+     *
+     * @throws ValueNotExistException
+     *
+     * @return int
+     */
+    private function getKeyCouple(float $value): int
+    {
+        foreach ($this->couples as $k => $couple) {
+            if ($value === $couple->getValue()) {
+                return $k;
+            }
+        }
+
+        throw new ValueNotExistException($value);
     }
 }

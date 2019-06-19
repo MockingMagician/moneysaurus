@@ -37,7 +37,7 @@ final class SystemTest extends TestCase
     public function test add value ok()
     {
         $this->system->addValue(0.2);
-        $this->assertSame([0.1, 0.2], $this->system->getValues());
+        $this->assertSame([0.2, 0.1], $this->system->getValues());
     }
 
     /**
@@ -70,6 +70,6 @@ final class SystemTest extends TestCase
     public function test construct with values()
     {
         $this->system = new System(...[0.1, 0.2]);
-        $this->assertSame([0.1, 0.2], $this->system->getValues());
+        $this->assertEquals([0.2, 0.1], $this->system->getValues());
     }
 }
