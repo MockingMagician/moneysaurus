@@ -9,6 +9,7 @@
 use MockingMagician\Moneysaurus\Algorithms\GreedyAlgorithm;
 use MockingMagician\Moneysaurus\Exceptions\ChangeAsLeftOver;
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
@@ -27,7 +28,7 @@ final class GreedyAlgorithmTest extends TestCase
     private $quantifiedSystem;
 
     /**
-     * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     protected function setUp(): void
     {
@@ -42,8 +43,9 @@ final class GreedyAlgorithmTest extends TestCase
 
     /**
      * @throws ChangeAsLeftOver
-     * @throws ValueNotExistException
      * @throws DuplicateValueException
+     * @throws NegativeQuantityException
+     * @throws ValueNotExistException
      */
     public function test change for optimal 18 cents()
     {

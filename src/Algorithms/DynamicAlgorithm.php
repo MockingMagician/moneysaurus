@@ -11,6 +11,7 @@ namespace MockingMagician\Moneysaurus\Algorithms;
 use MockingMagician\Moneysaurus\Algorithms\Dynamic\DynamicRootNode;
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
 use MockingMagician\Moneysaurus\Exceptions\MaxWorkingTimeException;
+use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
@@ -70,6 +71,7 @@ class DynamicAlgorithm implements ChangeInterface
      * @throws MaxWorkingTimeException
      * @throws ValueNotExistException
      * @throws DuplicateValueException
+     * @throws NegativeQuantityException
      *
      * @return QuantifiedSystem
      */

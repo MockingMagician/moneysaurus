@@ -9,6 +9,7 @@
 use MockingMagician\Moneysaurus\Algorithms\DynamicAlgorithm;
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
 use MockingMagician\Moneysaurus\Exceptions\MaxWorkingTimeException;
+use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
@@ -27,6 +28,7 @@ final class DynamicAlgorithmTest extends PHPUnit\Framework\TestCase
 
     /**
      * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     protected function setUp(): void
     {
@@ -47,9 +49,10 @@ final class DynamicAlgorithmTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @throws ValueNotExistException
-     * @throws MaxWorkingTimeException
      * @throws DuplicateValueException
+     * @throws MaxWorkingTimeException
+     * @throws NegativeQuantityException
+     * @throws ValueNotExistException
      */
     public function test change()
     {
@@ -64,9 +67,10 @@ final class DynamicAlgorithmTest extends PHPUnit\Framework\TestCase
     }
 
     /**
-     * @throws ValueNotExistException
-     * @throws MaxWorkingTimeException
      * @throws DuplicateValueException
+     * @throws MaxWorkingTimeException
+     * @throws NegativeQuantityException
+     * @throws ValueNotExistException
      */
     public function test change too long()
     {

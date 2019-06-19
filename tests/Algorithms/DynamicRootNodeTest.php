@@ -7,6 +7,7 @@
  */
 
 use MockingMagician\Moneysaurus\Algorithms\Dynamic\DynamicRootNode;
+use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
@@ -24,6 +25,7 @@ final class DynamicRootNodeTest extends TestCase
 
     /**
      * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     protected function setUp(): void
     {

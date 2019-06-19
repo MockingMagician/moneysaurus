@@ -9,6 +9,7 @@
 namespace MockingMagician\Moneysaurus\Tests;
 
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
+use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
@@ -23,7 +24,7 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @throws DuplicateValueException
-     * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     protected function setUp(): void
     {
@@ -34,7 +35,7 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @throws DuplicateValueException
-     * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     public function test add value ok()
     {
@@ -44,7 +45,7 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @throws DuplicateValueException
-     * @throws ValueNotExistException
+     * @throws NegativeQuantityException
      */
     public function test add value ko()
     {
@@ -106,13 +107,14 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @throws NegativeQuantityException
      * @throws ValueNotExistException
      */
     public function test construct with existing system()
     {
         $system = new System(...[0.1, 0.2]);
         $this->system = new QuantifiedSystem($system);
-        $this->assertSame([0.1, 0.2], $this->system->getValues());
+        $this->assertSame([0.2, 0.1], $this->system->getValues());
         $this->assertSame(0, $this->system->getQuantity(0.1));
         $this->assertSame(0, $this->system->getQuantity(0.2));
         $this->system->setQuantity(0.1, 10);

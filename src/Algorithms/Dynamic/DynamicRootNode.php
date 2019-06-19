@@ -43,6 +43,8 @@ class DynamicRootNode extends DynamicNode
             $lastRow = array_merge($lastRow, $node->getChildren());
         }
 
+        var_dump($this->lastRow);
+
         $this->lastRow = $lastRow;
     }
 

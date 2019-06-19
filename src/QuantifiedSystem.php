@@ -87,19 +87,21 @@ class QuantifiedSystem
      * @param int   $quantity
      *
      * @throws DuplicateValueException
-     * @throws ValueNotExistException
      * @throws NegativeQuantityException
      *
      * @return QuantifiedSystem
      */
     public function addValue(float $value, int $quantity): self
     {
-        if (null !== $this->getCouple($value)) {
-            throw new DuplicateValueException($value);
-        }
-        $this->couples[] = new Couple($value, $quantity);
+        try {
+            $this->getCouple($value);
+        } catch (ValueNotExistException $exception) {
+            $this->couples[] = new Couple($value, $quantity);
 
-        return $this;
+            return $this;
+        }
+
+        throw new DuplicateValueException($value);
     }
 
     /**
