@@ -39,18 +39,27 @@ phpstan-metadata: ## Static analysis pushed to JSON
 	vendor/bin/phpstan analyse --level=max --error-format=prettyJson src | tail -n +3 > .metadata/phpstan_result.json && echo "" >> .metadata/phpstan_result.json
 
 
+
 metadata-creator: ## Generate metadata
 	\
 cat .metadata/coverage/index.xml | grep -Pzo '<directory name="/">(?:.|\n\s)*?<lines ([^/]*)' \
 | xargs --null | grep -Po 'percent="[^"]*"' \
 | xargs --null | grep -Po '[\d]+(\.[\d]+)?' \
 | xargs --null -I '{}' echo '{}' > .metadata/.results/coverage.txt \
-\ && \
+&& \
 cat .metadata/tests.xml | grep -Pzo '<testsuites>(?:.|\n\s)*?<testsuite([^>]*)' \
 | xargs --null | grep -Po 'errors="[^"]*"' \
 | xargs --null | grep -Po '[\d]+' \
 | xargs --null -I '{}' echo '{}' > .metadata/.results/phpunit.txt \
-\
+&& \
+cat .metadata/code_style.xml | grep -Pzo '<testcase name="All OK"' \
+| xargs --null -I '{}' [ '{}' -ge 1 ] && echo "ok" > .metadata/.results/php-cs-fixer.txt || echo "ko" > .metadata/.results/php-cs-fixer.txt \
+&& \
+cat .metadata/phpstan_result.json | grep -Po '"errors": [\d]+' | grep -Po '[\d]+' \
+| xargs --null -I '{}' echo '{}' > .metadata/.results/phpstan_error.txt \
+&& \
+cat .metadata/phpstan_result.json | grep -Po '"file_errors": [\d]+' | grep -Po '[\d]+' \
+| xargs --null -I '{}' echo '{}' > .metadata/.results/phpstan_file_errors.txt \
 
 
 help: ## Display this help message

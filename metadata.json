@@ -1,0 +1,6 @@
+{
+    "coverage": "81.41",
+    "php-cs-fixer": "ok",
+    "phpstan": "0",
+    "phpunit": "0"
+}
