@@ -1,6 +1,6 @@
 {
-    "coverage": "81.41",
-    "php-cs-fixer": "ok",
+    "coverage": { "schemaVersion": 1, "label": "coverage", "message": "86", "color": "green" },
+    "php-cs-fixer": { "schemaVersion": 1, "label": "php-cs-fixer", "message": "ko", "color": "critical" },
     "phpstan": "0",
     "phpunit": "0"
 }

@@ -58,18 +58,32 @@ class SuperGreedyAlgorithm implements ChangeInterface
     }
 
     /**
-     * @param float $amount
+     * @param float                 $amount
+     * @param QuantifiedSystem      $system
+     * @param null|QuantifiedSystem $change
      *
      * @throws NegativeQuantityException
      * @throws ValueNotExistException
      */
-    private function reduce(float $amount)
+    private function reduce(float $amount, QuantifiedSystem $system, QuantifiedSystem &$change = null)
     {
-        $change = new QuantifiedSystem();
-        $system = clone $this->system;
+        $change = null !== $change ? $change : new QuantifiedSystem();
+        $system = clone $system;
 
-        $values = $this->system->getValues();
+        $values = $system->getValues();
         rsort($values);
+
+        $currentValue = current($values);
+        $neededQuantity = floor($amount / $currentValue) - 1;
+        $quantity = $this->system->getQuantity($currentValue);
+        if ($neededQuantity > $quantity) {
+            $rest = minus($amount, $quantity * $currentValue);
+            $system->setQuantity($currentValue, 0);
+
+            $change->setQuantity($currentValue, $quantity);
+
+            $this->reduce($rest, $system, $change);
+        }
 
         foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);

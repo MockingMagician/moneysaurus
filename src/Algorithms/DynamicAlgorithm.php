@@ -20,10 +20,10 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
  * Class DynamicAlgorithm.
  *
  * Dynamic algorithm is polynomial so it can consume lot of memory and time
- * A max working time default value is set to 10 sec
+ * A max working time default value is set to 1 sec
  * It is not recommended to use this algorithm
  * It is better to use Greedy algorithm for canonical money
- * Or if you not sure about canonical for your money system use...
+ * Or if you not sure about canonical from your money system, use...
  */
 class DynamicAlgorithm implements ChangeInterface
 {
@@ -31,12 +31,10 @@ class DynamicAlgorithm implements ChangeInterface
     const DEFAULT_TIME = 1;
 
     private $system;
+    private $maxWorkingTime;
+
     /** @var DynamicRootNode */
     private $dynamicRootNode;
-    /**
-     * @var int
-     */
-    private $maxWorkingTime;
 
     public function __construct(QuantifiedSystem $system, int $maxWorkingTime = self::DEFAULT_TIME)
     {
