@@ -3,7 +3,9 @@
 [![Total Downloads](https://poser.pugx.org/mocking-magician/moneysaurus/downloads)](https://packagist.org/packages/mocking-magician/moneysaurus)
 [![License](https://poser.pugx.org/mocking-magician/moneysaurus/license)](https://packagist.org/packages/mocking-magician/moneysaurus)
 [![composer.lock](https://poser.pugx.org/mocking-magician/moneysaurus/composerlock)](https://packagist.org/packages/mocking-magician/moneysaurus)
-![coverage](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FMockingMagician%2Fmoneysaurus%2Ffeature%2Fsuper-greedy%2Fmetadata.json)
+![coverage](https://img.shields.io/endpoint.svg?url=https://raw.githubusercontent.com/MockingMagician/moneysaurus/feature/super-greedy/.metadata/coverage.json)
+![phpcs](https://img.shields.io/endpoint.svg?url=https://raw.githubusercontent.com/MockingMagician/moneysaurus/feature/super-greedy/.metadata/php_cs_fixer.json)
+![phpstan](https://img.shields.io/endpoint.svg?url=https://raw.githubusercontent.com/MockingMagician/moneysaurus/feature/super-greedy/.metadata/phpstan.json)
 
 # Description
 
