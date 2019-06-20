@@ -45,8 +45,6 @@ final class DynamicRootNodeTest extends TestCase
         $this->quantifiedSystem->setQuantity(5, 5);
         $this->quantifiedSystem->setQuantity(50, 5);
         $this->quantifiedSystem->setQuantity(100, 5);
-
-        $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 7);
     }
 
     /**
@@ -54,20 +52,19 @@ final class DynamicRootNodeTest extends TestCase
      */
     public function testGetSuccessOnChildren()
     {
+        $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 7);
         $this->dynamicRootNode->nextRow();
-        $this->assertNull($this->dynamicRootNode->getSuccessOnChildren());
         $this->dynamicRootNode->nextRow();
+
         $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
 
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 16);
 
         $this->dynamicRootNode->nextRow();
-        $this->assertNull($this->dynamicRootNode->getSuccessOnChildren());
         $this->dynamicRootNode->nextRow();
-        $this->assertNull($this->dynamicRootNode->getSuccessOnChildren());
         $this->dynamicRootNode->nextRow();
-        $this->assertNull($this->dynamicRootNode->getSuccessOnChildren());
         $this->dynamicRootNode->nextRow();
+
         $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
 
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 16.52);
@@ -75,6 +72,7 @@ final class DynamicRootNodeTest extends TestCase
         while (null === $this->dynamicRootNode->getSuccessOnChildren()) {
             $this->dynamicRootNode->nextRow();
         }
+        $this->dynamicRootNode->nextRow();
         $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
     }
 }

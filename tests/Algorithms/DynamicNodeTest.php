@@ -52,5 +52,6 @@ final class DynamicNodeTest extends TestCase
     {
         $this->dynamicNode->nextChildren();
         $this->assertNotNull($this->dynamicNode->getSuccessOnChild());
+        $this->dynamicNode->nextChildren();
     }
 }

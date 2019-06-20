@@ -40,7 +40,7 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
     public function test add value ok()
     {
         $this->system->addValue(0.2, 20);
-        $this->assertSame([0.1, 0.2], $this->system->getValues());
+        $this->assertSame([0.2, 0.1], $this->system->getValues());
     }
 
     /**
@@ -114,7 +114,7 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
     {
         $system = new System(...[0.1, 0.2]);
         $this->system = new QuantifiedSystem($system);
-        $this->assertSame([0.2, 0.1], $this->system->getValues());
+        $this->assertEquals([0.2, 0.1], $this->system->getValues());
         $this->assertSame(0, $this->system->getQuantity(0.1));
         $this->assertSame(0, $this->system->getQuantity(0.2));
         $this->system->setQuantity(0.1, 10);

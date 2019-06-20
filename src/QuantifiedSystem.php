@@ -55,6 +55,13 @@ class QuantifiedSystem
         return $string ? $string : '';
     }
 
+    public function __clone()
+    {
+        foreach ($this->couples as $k => $couple) {
+            $this->couples[$k] = clone $couple;
+        }
+    }
+
     /**
      * @param float $value
      * @param int   $quantity
@@ -128,6 +135,7 @@ class QuantifiedSystem
         foreach ($this->couples as $couple) {
             $values[] = $couple->getValue();
         }
+        rsort($values);
 
         return $values;
     }

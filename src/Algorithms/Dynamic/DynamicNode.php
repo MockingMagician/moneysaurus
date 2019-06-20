@@ -29,7 +29,7 @@ class DynamicNode
      *
      * @param QuantifiedSystem $system
      * @param float            $change
-     * @param null|DynamicNode $parent
+     * @param null|self        $parent
      */
     public function __construct(QuantifiedSystem $system, float $change, ?self $parent = null)
     {
@@ -38,6 +38,9 @@ class DynamicNode
         $this->parent = $parent;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function __debugInfo()
     {
         return [
@@ -48,18 +51,34 @@ class DynamicNode
     }
 
     /**
-     * @return QuantifiedSystem
+     * @codeCoverageIgnore
+     */
+    public function __toString()
+    {
+        $string = json_encode($this->__debugInfo());
+
+        return $string ? $string : '';
+    }
+
+    /**
+     * @codeCoverageIgnore
      */
     public function getSystem(): QuantifiedSystem
     {
         return $this->system;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getChange(): float
     {
         return $this->change;
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function getParent(): ?self
     {
         return $this->parent;
@@ -67,6 +86,7 @@ class DynamicNode
 
     /**
      * @return DynamicNode[]
+     * @codeCoverageIgnore
      */
     public function getChildren(): array
     {
@@ -83,12 +103,11 @@ class DynamicNode
         }
 
         $values = $this->system->getValues();
-        arsort($values);
+        rsort($values);
 
         foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);
-            if ($this->change - $value >= 0.0 && $quantity > 0) {
-                $amount = preventFromPhpInternalRoundingAfterOperate($this->change, $value);
+            if (0.0 <= ($amount = preventFromPhpInternalRoundingAfterOperate($this->change, $value)) && $quantity > 0) {
                 --$quantity;
                 $system = clone $this->system;
                 $system->setQuantity($value, $quantity);
