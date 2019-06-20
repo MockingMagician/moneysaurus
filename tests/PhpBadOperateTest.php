@@ -31,9 +31,9 @@ final class PhpBadOperateTest extends TestCase
         $this->assertFalse(0.0 === $a);
         $this->assertFalse(0 === $a);
         $this->assertFalse(0.0 === $a);
-        $this->assertFalse(0   === $a);
+        $this->assertFalse(0 === $a);
         $this->assertFalse(0.0 == $a);
-        $this->assertFalse(0   == $a);
+        $this->assertFalse(0 == $a);
 
         $a = 10.0;
         foreach ($toDeduce as $deduce) {
@@ -46,9 +46,9 @@ final class PhpBadOperateTest extends TestCase
         // but not less or great than 0
         $this->assertFalse(0 > $a);
         $this->assertFalse(0 < $a);
-        //
+
         $this->assertTrue(0.0 == $a);
-        $this->assertTrue(0   == $a);
+        $this->assertTrue(0 == $a);
     }
 
     public function test float plus()
@@ -63,10 +63,10 @@ final class PhpBadOperateTest extends TestCase
 
         $this->assertTrue('11' === (string) $a);
         // but
-        $this->assertFalse($a === 11);
-        $this->assertFalse($a === 11.0);
-        $this->assertFalse($a == 11);
-        $this->assertFalse($a == 11.0);
+        $this->assertFalse(11 === $a);
+        $this->assertFalse(11.0 === $a);
+        $this->assertFalse(11 == $a);
+        $this->assertFalse(11.0 == $a);
 
         $a = 0.0;
         foreach ($toPlus as $plus) {
@@ -79,8 +79,8 @@ final class PhpBadOperateTest extends TestCase
         // but not less or great than 11
         $this->assertFalse(11 > $a);
         $this->assertFalse(11 < $a);
-        //
+
         $this->assertTrue(11.0 == $a);
-        $this->assertTrue(11   == $a);
+        $this->assertTrue(11 == $a);
     }
 }
