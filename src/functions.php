@@ -6,8 +6,23 @@
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
-namespace MockingMagician\Moneysaurus {
-    function preventFromPhpInternalRoundingAfterOperate(float $amount, float $amountToDeduce): float
+namespace MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate {
+    /**
+     * Floating point numbers have limited precision... Additionally, rational numbers that are exactly representable as
+     * floating point numbers in base 10, like 0.1 or 0.7, do not have an exact representation as floating point numbers
+     * in base 2, which is used internally, no matter the size of the mantissa.
+     * This helper prevent that side effect.
+     *
+     * @example 0.1 - 0.1 can be different to 0.0
+     *
+     * @see https://www.php.net/manual/en/language.types.float.php
+     *
+     * @param float $amount
+     * @param float $amountToDeduce
+     *
+     * @return float
+     */
+    function minus(float $amount, float $amountToDeduce): float
     {
         $amount -= $amountToDeduce;
         $exp = explode('.', (string) $amount);

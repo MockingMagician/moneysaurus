@@ -13,7 +13,7 @@ use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
 use MockingMagician\Moneysaurus\Exceptions\MaxWorkingTimeException;
 use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
-use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
+use function MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate\minus;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 /**
@@ -28,7 +28,7 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 class DynamicAlgorithm implements ChangeInterface
 {
     /** @var int */
-    const DEFAULT_TIME = 10;
+    const DEFAULT_TIME = 1;
 
     private $system;
     /** @var DynamicRootNode */
@@ -91,7 +91,7 @@ class DynamicAlgorithm implements ChangeInterface
         $change = new QuantifiedSystem();
 
         while (null !== $node && $parent = $node->getParent()) {
-            $amount = preventFromPhpInternalRoundingAfterOperate($parent->getChange(), $node->getChange());
+            $amount = minus($parent->getChange(), $node->getChange());
 
             try {
                 $quantity = $change->getQuantity($amount);

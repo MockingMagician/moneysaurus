@@ -8,14 +8,13 @@
 
 namespace MockingMagician\Moneysaurus\Algorithms;
 
-use MockingMagician\Moneysaurus\Exceptions\ChangeAsLeftOver;
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
 use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use function MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate\minus;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
-class GreedyAlgorithm implements ChangeInterface
+class SuperGreedyAlgorithm implements ChangeInterface
 {
     /** @var QuantifiedSystem */
     private $system;
@@ -48,15 +47,26 @@ class GreedyAlgorithm implements ChangeInterface
     /**
      * @param float $amount
      *
-     * @throws ValueNotExistException
-     * @throws ChangeAsLeftOver
      * @throws NegativeQuantityException
      *
      * @return QuantifiedSystem
      */
     public function change(float $amount): QuantifiedSystem
     {
+        // TODO: Implement change() method.
+        return new QuantifiedSystem();
+    }
+
+    /**
+     * @param float $amount
+     *
+     * @throws NegativeQuantityException
+     * @throws ValueNotExistException
+     */
+    private function reduce(float $amount)
+    {
         $change = new QuantifiedSystem();
+        $system = clone $this->system;
 
         $values = $this->system->getValues();
         rsort($values);
@@ -78,11 +88,5 @@ class GreedyAlgorithm implements ChangeInterface
                 }
             }
         }
-
-        if ($amount > 0) {
-            throw new ChangeAsLeftOver($amount, $change);
-        }
-
-        return $change;
     }
 }

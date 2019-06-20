@@ -13,15 +13,18 @@ use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 class DynamicRootNode extends DynamicNode
 {
+    private const LARGER_LIMIT = 64;
     /** @var ?DynamicNode */
     private $successOnChildren;
     /** @var DynamicNode[] */
     private $lastRow = [];
+    private $largerLimit;
 
-    public function __construct(QuantifiedSystem $system, float $change)
+    public function __construct(QuantifiedSystem $system, float $change, ?int $largerLimit = self::LARGER_LIMIT)
     {
         parent::__construct($system, $change, null);
         $this->lastRow = [$this];
+        $this->largerLimit = $largerLimit;
     }
 
     /**
@@ -41,9 +44,16 @@ class DynamicRootNode extends DynamicNode
                 return;
             }
             $lastRow = array_merge($lastRow, $node->getChildren());
+            if (null !== $this->largerLimit && $lastRow > $this->largerLimit) {
+                break;
+            }
         }
 
         $this->lastRow = $lastRow;
+
+        if (0 === \count($this->lastRow)) {
+            return;
+        }
     }
 
     public function getSuccessOnChildren(): ?DynamicNode

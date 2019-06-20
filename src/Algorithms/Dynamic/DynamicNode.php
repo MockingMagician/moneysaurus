@@ -9,7 +9,7 @@
 namespace MockingMagician\Moneysaurus\Algorithms\Dynamic;
 
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
-use function MockingMagician\Moneysaurus\preventFromPhpInternalRoundingAfterOperate;
+use function MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate\minus;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 
 class DynamicNode
@@ -107,7 +107,7 @@ class DynamicNode
 
         foreach ($values as $value) {
             $quantity = $this->system->getQuantity($value);
-            if (0.0 <= ($amount = preventFromPhpInternalRoundingAfterOperate($this->change, $value)) && $quantity > 0) {
+            if (0.0 <= ($amount = minus($this->change, $value)) && $quantity > 0) {
                 --$quantity;
                 $system = clone $this->system;
                 $system->setQuantity($value, $quantity);
