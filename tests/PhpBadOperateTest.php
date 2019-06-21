@@ -84,8 +84,8 @@ final class PhpBadOperateTest extends TestCase
 
     public function test float multiply()
     {
-        /** @var float[] $toPlus */
-        $toMultiply = [0.2, 0.3, 0.4, 1.5, 1.7 , 1.8]; // multiply equal 0.11016
+        /** @var float[] $toMultiply */
+        $toMultiply = [0.2, 0.3, 0.4, 1.5, 1.7, 1.8]; // multiply equal 0.11016
 
         $a = 1.0;
         foreach ($toMultiply as $multiply) {

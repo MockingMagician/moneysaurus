@@ -18,19 +18,19 @@ namespace MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOper
      *
      * @see https://www.php.net/manual/en/language.types.float.php
      *
-     * @param float $amount
-     * @param float $amountToDeduce
+     * @param float $a
+     * @param float $b
      *
      * @return float
      */
-    function minus(float $amount, float $amountToDeduce): float
+    function minus(float $a, float $b): float
     {
-        $amount -= $amountToDeduce;
-        $exp = explode('.', (string) $amount);
+        $a -= $b;
+        $exp = explode('.', (string) $a);
         $d = isset($exp[1]) ? $exp[1] : '';
         $l = mb_strlen($d);
 
-        return round($amount, $l);
+        return round($a, $l);
     }
 
     function plus(float $a, float $b): float
@@ -51,5 +51,10 @@ namespace MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOper
         $l = mb_strlen($d);
 
         return round($a, $l);
+    }
+
+    function matcher()
+    {
+
     }
 }
