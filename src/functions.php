@@ -42,4 +42,14 @@ namespace MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOper
 
         return round($a, $l);
     }
+
+    function multiply(float $a, float $b): float
+    {
+        $a *= $b;
+        $exp = explode('.', (string) $a);
+        $d = isset($exp[1]) ? $exp[1] : '';
+        $l = mb_strlen($d);
+
+        return round($a, $l);
+    }
 }

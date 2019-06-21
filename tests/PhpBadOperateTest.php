@@ -9,6 +9,7 @@
 namespace MockingMagician\Moneysaurus\Tests;
 
 use function MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate\minus;
+use function MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate\multiply;
 use function MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOperate\plus;
 use PHPUnit\Framework\TestCase;
 
@@ -27,9 +28,7 @@ final class PhpBadOperateTest extends TestCase
             $a -= $deduce;
         }
 
-        $this->assertFalse('0' === (string) $a);
-        $this->assertFalse(0.0 === $a);
-        $this->assertFalse(0 === $a);
+        $this->assertFalse('0' === (string) $a); // Can be true or false, depend on case
         $this->assertFalse(0.0 === $a);
         $this->assertFalse(0 === $a);
         $this->assertFalse(0.0 == $a);
@@ -61,8 +60,7 @@ final class PhpBadOperateTest extends TestCase
             $a += $plus;
         }
 
-        $this->assertTrue('11' === (string) $a);
-        // but
+        $this->assertTrue('11' === (string) $a); // Can be true or false, depend on case
         $this->assertFalse(11 === $a);
         $this->assertFalse(11.0 === $a);
         $this->assertFalse(11 == $a);
@@ -82,5 +80,28 @@ final class PhpBadOperateTest extends TestCase
 
         $this->assertTrue(11.0 == $a);
         $this->assertTrue(11 == $a);
+    }
+
+    public function test float multiply()
+    {
+        /** @var float[] $toPlus */
+        $toMultiply = [0.2, 0.3, 0.4, 1.5, 1.7 , 1.8]; // multiply equal 0.11016
+
+        $a = 1.0;
+        foreach ($toMultiply as $multiply) {
+            $a *= $multiply;
+        }
+
+        $this->assertTrue('0.11016' === (string) $a); // Can be true or false, depend on case
+        $this->assertFalse(0.11016 === $a);
+        $this->assertFalse(0.11016 == $a);
+
+        $a = 1.0;
+        foreach ($toMultiply as $multiply) {
+            $a = multiply($a, $multiply);
+        }
+
+        $this->assertTrue(0.11016 === $a, (string) $a);
+        $this->assertTrue(0.11016 == $a, (string) $a);
     }
 }
