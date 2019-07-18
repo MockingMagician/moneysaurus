@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -39,7 +41,7 @@ class SuperGreedyAlgorithm implements ChangeInterface
      */
     public function __toString()
     {
-        $string = json_encode($this->__debugInfo());
+        $string = \json_encode($this->__debugInfo());
 
         return $string ? $string : '';
     }
@@ -65,16 +67,16 @@ class SuperGreedyAlgorithm implements ChangeInterface
      * @throws NegativeQuantityException
      * @throws ValueNotExistException
      */
-    private function reduce(float $amount, QuantifiedSystem $system, QuantifiedSystem &$change = null)
+    private function reduce(float $amount, QuantifiedSystem $system, QuantifiedSystem &$change = null): void
     {
         $change = null !== $change ? $change : new QuantifiedSystem();
         $system = clone $system;
 
         $values = $system->getValues();
-        rsort($values);
+        \rsort($values);
 
-        $currentValue = current($values);
-        $neededQuantity = floor($amount / $currentValue) - 1;
+        $currentValue = \current($values);
+        $neededQuantity = \floor($amount / $currentValue) - 1;
         $quantity = $this->system->getQuantity($currentValue);
         if ($neededQuantity > $quantity) {
             $rest = minus($amount, $quantity * $currentValue);

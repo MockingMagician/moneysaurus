@@ -21,7 +21,7 @@ class System
     public function __construct(float ...$values)
     {
         $this->values = $values;
-        rsort($this->values);
+        \rsort($this->values);
     }
 
     /**
@@ -39,7 +39,7 @@ class System
      */
     public function __toString()
     {
-        $string = json_encode($this->__debugInfo());
+        $string = \json_encode($this->__debugInfo());
 
         return $string ? $string : '';
     }
@@ -53,11 +53,11 @@ class System
      */
     public function addValue(float $value): self
     {
-        if (false !== array_search($value, $this->values, true)) {
+        if (false !== \array_search($value, $this->values, true)) {
             throw new DuplicateValueException($value);
         }
         $this->values[] = $value;
-        rsort($this->values);
+        \rsort($this->values);
 
         return $this;
     }
@@ -71,7 +71,7 @@ class System
      */
     public function removeValue(float $value): self
     {
-        if (false === ($k = array_search($value, $this->values, true))) {
+        if (false === ($k = \array_search($value, $this->values, true))) {
             throw new ValueNotExistException($value);
         }
         unset($this->values[$k]);

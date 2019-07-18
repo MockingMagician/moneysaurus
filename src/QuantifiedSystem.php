@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -50,7 +52,7 @@ class QuantifiedSystem
      */
     public function __toString()
     {
-        $string = json_encode($this->__debugInfo());
+        $string = \json_encode($this->__debugInfo());
 
         return $string ? $string : '';
     }
@@ -135,7 +137,7 @@ class QuantifiedSystem
         foreach ($this->couples as $couple) {
             $values[] = $couple->getValue();
         }
-        rsort($values);
+        \rsort($values);
 
         return $values;
     }

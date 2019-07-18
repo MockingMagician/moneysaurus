@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -16,6 +18,7 @@ use MockingMagician\Moneysaurus\System;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
 {
@@ -37,17 +40,17 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
      * @throws DuplicateValueException
      * @throws NegativeQuantityException
      */
-    public function test add value ok()
+    public function test add value ok(): void
     {
         $this->system->addValue(0.2, 20);
-        $this->assertSame([0.2, 0.1], $this->system->getValues());
+        static::assertSame([0.2, 0.1], $this->system->getValues());
     }
 
     /**
      * @throws DuplicateValueException
      * @throws NegativeQuantityException
      */
-    public function test add value ko()
+    public function test add value ko(): void
     {
         $this->expectException(DuplicateValueException::class);
         $this->system->addValue(0.1, 10);
@@ -56,16 +59,16 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
     /**
      * @throws ValueNotExistException
      */
-    public function test remove value ok()
+    public function test remove value ok(): void
     {
         $this->system->removeValue(0.1);
-        $this->assertSame([], $this->system->getValues());
+        static::assertSame([], $this->system->getValues());
     }
 
     /**
      * @throws ValueNotExistException
      */
-    public function test remove value ko()
+    public function test remove value ko(): void
     {
         $this->expectException(ValueNotExistException::class);
         $this->system->removeValue(0.3);
@@ -74,16 +77,16 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
     /**
      * @throws ValueNotExistException
      */
-    public function test set quantity ok()
+    public function test set quantity ok(): void
     {
         $this->system->setQuantity(0.1, 15);
-        $this->assertSame(15, $this->system->getQuantity(0.1));
+        static::assertSame(15, $this->system->getQuantity(0.1));
     }
 
     /**
      * @throws ValueNotExistException
      */
-    public function test set quantity ko()
+    public function test set quantity ko(): void
     {
         $this->expectException(ValueNotExistException::class);
         $this->system->setQuantity(0.2, 15);
@@ -92,15 +95,15 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
     /**
      * @throws ValueNotExistException
      */
-    public function test get quantity ok()
+    public function test get quantity ok(): void
     {
-        $this->assertSame(10, $this->system->getQuantity(0.1));
+        static::assertSame(10, $this->system->getQuantity(0.1));
     }
 
     /**
      * @throws ValueNotExistException
      */
-    public function test get quantity ko()
+    public function test get quantity ko(): void
     {
         $this->expectException(ValueNotExistException::class);
         $this->system->getQuantity(0.2);
@@ -110,15 +113,15 @@ final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
      * @throws NegativeQuantityException
      * @throws ValueNotExistException
      */
-    public function test construct with existing system()
+    public function test construct with existing system(): void
     {
         $system = new System(...[0.1, 0.2]);
         $this->system = new QuantifiedSystem($system);
-        $this->assertEquals([0.2, 0.1], $this->system->getValues());
-        $this->assertSame(0, $this->system->getQuantity(0.1));
-        $this->assertSame(0, $this->system->getQuantity(0.2));
+        static::assertEquals([0.2, 0.1], $this->system->getValues());
+        static::assertSame(0, $this->system->getQuantity(0.1));
+        static::assertSame(0, $this->system->getQuantity(0.2));
         $this->system->setQuantity(0.1, 10);
-        $this->assertSame(10, $this->system->getQuantity(0.1));
+        static::assertSame(10, $this->system->getQuantity(0.1));
         $this->expectException(ValueNotExistException::class);
         $this->system->setQuantity(0.3, 10);
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -15,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class SystemTest extends TestCase
 {
@@ -34,16 +37,16 @@ final class SystemTest extends TestCase
     /**
      * @throws DuplicateValueException
      */
-    public function test add value ok()
+    public function test add value ok(): void
     {
         $this->system->addValue(0.2);
-        $this->assertSame([0.2, 0.1], $this->system->getValues());
+        static::assertSame([0.2, 0.1], $this->system->getValues());
     }
 
     /**
      * @throws DuplicateValueException
      */
-    public function test add value ko()
+    public function test add value ko(): void
     {
         $this->expectException(DuplicateValueException::class);
         $this->system->addValue(0.1);
@@ -52,24 +55,24 @@ final class SystemTest extends TestCase
     /**
      * @throws ValueNotExistException
      */
-    public function test remove value ok()
+    public function test remove value ok(): void
     {
         $this->system->removeValue(0.1);
-        $this->assertSame([], $this->system->getValues());
+        static::assertSame([], $this->system->getValues());
     }
 
     /**
      * @throws ValueNotExistException
      */
-    public function test remove value ko()
+    public function test remove value ko(): void
     {
         $this->expectException(ValueNotExistException::class);
         $this->system->removeValue(0.3);
     }
 
-    public function test construct with values()
+    public function test construct with values(): void
     {
         $this->system = new System(...[0.1, 0.2]);
-        $this->assertEquals([0.2, 0.1], $this->system->getValues());
+        static::assertEquals([0.2, 0.1], $this->system->getValues());
     }
 }

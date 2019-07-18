@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -58,7 +60,7 @@ class DynamicAlgorithm implements ChangeInterface
      */
     public function __toString()
     {
-        $string = json_encode($this->__debugInfo());
+        $string = \json_encode($this->__debugInfo());
 
         return $string ? $string : '';
     }
@@ -75,13 +77,13 @@ class DynamicAlgorithm implements ChangeInterface
      */
     public function change(float $amount): QuantifiedSystem
     {
-        $startTime = time();
+        $startTime = \time();
 
         $this->dynamicRootNode = new DynamicRootNode($this->system, $amount);
 
         while (null === ($node = $this->dynamicRootNode->getSuccessOnChildren())) {
             $this->dynamicRootNode->nextRow();
-            if (time() - $startTime > $this->maxWorkingTime) {
+            if (\time() - $startTime > $this->maxWorkingTime) {
                 throw new MaxWorkingTimeException($this->maxWorkingTime);
             }
         }

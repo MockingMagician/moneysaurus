@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -15,6 +17,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ * @coversNothing
  */
 final class DynamicNodeTest extends TestCase
 {
@@ -48,10 +51,10 @@ final class DynamicNodeTest extends TestCase
     /**
      * @throws ValueNotExistException
      */
-    public function testGetSuccessOnChild()
+    public function testGetSuccessOnChild(): void
     {
         $this->dynamicNode->nextChildren();
-        $this->assertNotNull($this->dynamicNode->getSuccessOnChild());
+        static::assertNotNull($this->dynamicNode->getSuccessOnChild());
         $this->dynamicNode->nextChildren();
     }
 }

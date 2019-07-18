@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -16,6 +18,6 @@ class ValueNotExistException extends \Exception
 
     public function __construct(float $value, int $code = 0, Throwable $previous = null)
     {
-        parent::__construct(sprintf(self::MESSAGE, $value), $code, $previous);
+        parent::__construct(\sprintf(self::MESSAGE, $value), $code, $previous);
     }
 }

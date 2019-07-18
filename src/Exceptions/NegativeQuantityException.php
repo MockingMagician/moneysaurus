@@ -16,7 +16,7 @@ class NegativeQuantityException extends \Exception
 {
     public function __construct(float $quantity, int $code = 0, Throwable $previous = null)
     {
-        $message = sprintf('Quantity can not be negative. `%s` given', $quantity);
+        $message = \sprintf('Quantity can not be negative. `%s` given', $quantity);
         parent::__construct($message, $code, $previous);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -26,35 +28,34 @@ namespace MockingMagician\Moneysaurus\Helpers\PreventFromPhpBadStockingAfterOper
     function minus(float $a, float $b): float
     {
         $a -= $b;
-        $exp = explode('.', (string) $a);
+        $exp = \explode('.', (string) $a);
         $d = isset($exp[1]) ? $exp[1] : '';
-        $l = mb_strlen($d);
+        $l = \mb_strlen($d);
 
-        return round($a, $l);
+        return \round($a, $l);
     }
 
     function plus(float $a, float $b): float
     {
         $a += $b;
-        $exp = explode('.', (string) $a);
+        $exp = \explode('.', (string) $a);
         $d = isset($exp[1]) ? $exp[1] : '';
-        $l = mb_strlen($d);
+        $l = \mb_strlen($d);
 
-        return round($a, $l);
+        return \round($a, $l);
     }
 
     function multiply(float $a, float $b): float
     {
         $a *= $b;
-        $exp = explode('.', (string) $a);
+        $exp = \explode('.', (string) $a);
         $d = isset($exp[1]) ? $exp[1] : '';
-        $l = mb_strlen($d);
+        $l = \mb_strlen($d);
 
-        return round($a, $l);
+        return \round($a, $l);
     }
 
-    function matcher()
+    function matcher(): void
     {
-
     }
 }
