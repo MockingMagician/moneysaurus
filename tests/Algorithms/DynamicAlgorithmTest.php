@@ -8,6 +8,8 @@ declare(strict_types=1);
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
+namespace MockingMagician\Moneysaurus\Tests\Algorithms;
+
 use MockingMagician\Moneysaurus\Algorithms\DynamicAlgorithm;
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
 use MockingMagician\Moneysaurus\Exceptions\MaxWorkingTimeException;
@@ -15,12 +17,12 @@ use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
 use MockingMagician\Moneysaurus\QuantifiedSystem;
 use MockingMagician\Moneysaurus\System;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
  */
-final class DynamicAlgorithmTest extends PHPUnit\Framework\TestCase
+final class DynamicAlgorithmTest extends TestCase
 {
     /** @var System */
     private $euroSystem;

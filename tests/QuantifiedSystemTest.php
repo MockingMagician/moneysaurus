@@ -18,7 +18,6 @@ use MockingMagician\Moneysaurus\System;
 
 /**
  * @internal
- * @coversNothing
  */
 final class QuantifiedSystemTest extends \PHPUnit\Framework\TestCase
 {

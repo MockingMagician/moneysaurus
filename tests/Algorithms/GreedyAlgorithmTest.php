@@ -8,6 +8,8 @@ declare(strict_types=1);
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
+namespace MockingMagician\Moneysaurus\Tests\Algorithms;
+
 use MockingMagician\Moneysaurus\Algorithms\GreedyAlgorithm;
 use MockingMagician\Moneysaurus\Exceptions\ChangeAsLeftOver;
 use MockingMagician\Moneysaurus\Exceptions\DuplicateValueException;
@@ -19,7 +21,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
  */
 final class GreedyAlgorithmTest extends TestCase
 {

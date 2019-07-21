@@ -20,6 +20,11 @@
             "MockingMagician\\Moneysaurus\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "MockingMagician\\Moneysaurus\\": "src"
+        }
+    },
     "config": {
         "platform": {
             "php": "7.1.0"

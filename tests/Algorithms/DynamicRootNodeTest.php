@@ -8,6 +8,8 @@ declare(strict_types=1);
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
 
+namespace MockingMagician\Moneysaurus\Tests\Algorithms;
+
 use MockingMagician\Moneysaurus\Algorithms\Dynamic\DynamicRootNode;
 use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
 use MockingMagician\Moneysaurus\Exceptions\ValueNotExistException;
@@ -17,7 +19,6 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
  */
 final class DynamicRootNodeTest extends TestCase
 {

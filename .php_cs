@@ -19,6 +19,7 @@ $config = PhpCsFixer\Config::create()
         '@Symfony:risky' => true,
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
+        'php_unit_test_class_requires_covers' => false,
         'self_accessor' => false,
         'php_unit_strict' => false,
         'yoda_style' => true,
