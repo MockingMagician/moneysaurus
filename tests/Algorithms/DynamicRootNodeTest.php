@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
+
+namespace MockingMagician\Moneysaurus\Tests\Algorithms;
 
 use MockingMagician\Moneysaurus\Algorithms\Dynamic\DynamicRootNode;
 use MockingMagician\Moneysaurus\Exceptions\NegativeQuantityException;
@@ -50,13 +54,13 @@ final class DynamicRootNodeTest extends TestCase
     /**
      * @throws ValueNotExistException
      */
-    public function testGetSuccessOnChildren()
+    public function testGetSuccessOnChildren(): void
     {
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 7);
         $this->dynamicRootNode->nextRow();
         $this->dynamicRootNode->nextRow();
 
-        $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
+        static::assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
 
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 16);
 
@@ -65,7 +69,7 @@ final class DynamicRootNodeTest extends TestCase
         $this->dynamicRootNode->nextRow();
         $this->dynamicRootNode->nextRow();
 
-        $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
+        static::assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
 
         $this->dynamicRootNode = new DynamicRootNode($this->quantifiedSystem, 16.52);
 
@@ -73,6 +77,6 @@ final class DynamicRootNodeTest extends TestCase
             $this->dynamicRootNode->nextRow();
         }
         $this->dynamicRootNode->nextRow();
-        $this->assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
+        static::assertNotNull($this->dynamicRootNode->getSuccessOnChildren());
     }
 }

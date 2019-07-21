@@ -1,10 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
  * @link https://github.com/MockingMagician/moneysaurus/blob/master/README.md
  */
+
+namespace MockingMagician\Moneysaurus\Tests\Algorithms;
 
 use MockingMagician\Moneysaurus\Algorithms\GreedyAlgorithm;
 use MockingMagician\Moneysaurus\Exceptions\ChangeAsLeftOver;
@@ -47,7 +51,7 @@ final class GreedyAlgorithmTest extends TestCase
      * @throws NegativeQuantityException
      * @throws ValueNotExistException
      */
-    public function test change for optimal 18 cents()
+    public function test change for optimal 18 cents(): void
     {
         $this->quantifiedSystem->setQuantity(0.2, 1);
         $this->quantifiedSystem->setQuantity(0.1, 1);
@@ -55,7 +59,7 @@ final class GreedyAlgorithmTest extends TestCase
         $this->quantifiedSystem->setQuantity(0.02, 1);
         $this->quantifiedSystem->setQuantity(0.01, 1);
 
-        $this->assertEquals(
+        static::assertEquals(
             (new QuantifiedSystem())
                 ->addValue(0.1, 1)
                 ->addValue(0.05, 1)
@@ -69,7 +73,7 @@ final class GreedyAlgorithmTest extends TestCase
         $this->quantifiedSystem->setQuantity(0.02, 4);
         $this->quantifiedSystem->setQuantity(0.01, 1);
 
-        $this->assertEquals(
+        static::assertEquals(
             (new QuantifiedSystem())
                 ->addValue(0.1, 1)
                 ->addValue(0.02, 4),
@@ -87,10 +91,10 @@ final class GreedyAlgorithmTest extends TestCase
         } catch (ChangeAsLeftOver $exception) {
         }
 
-        $this->assertInstanceOf(ChangeAsLeftOver::class, $exception);
+        static::assertInstanceOf(ChangeAsLeftOver::class, $exception);
 
-        $this->assertEquals(0.01, $exception->getLeftOver());
-        $this->assertEquals(
+        static::assertEquals(0.01, $exception->getLeftOver());
+        static::assertEquals(
             (new QuantifiedSystem())
                 ->addValue(0.1, 1)
                 ->addValue(0.01, 7),

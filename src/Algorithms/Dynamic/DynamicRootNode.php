@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -43,7 +45,7 @@ class DynamicRootNode extends DynamicNode
             if ($this->successOnChildren = $node->getSuccessOnChild()) {
                 return;
             }
-            $lastRow = array_merge($lastRow, $node->getChildren());
+            $lastRow = \array_merge($lastRow, $node->getChildren());
             if (null !== $this->largerLimit && $lastRow > $this->largerLimit) {
                 break;
             }

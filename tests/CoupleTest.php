@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * @author Marc MOREAU <moreau.marc.web@gmail.com>
  * @license https://github.com/MockingMagician/moneysaurus/blob/master/LICENSE.md Apache License 2.0
@@ -32,7 +34,7 @@ final class CoupleTest extends TestCase
     /**
      * @throws NegativeQuantityException
      */
-    public function test construct fail()
+    public function test construct fail(): void
     {
         $this->expectException(NegativeQuantityException::class);
         new Couple(1.0, -5);
@@ -41,51 +43,51 @@ final class CoupleTest extends TestCase
     /**
      * @throws NegativeQuantityException
      */
-    public function test decrement()
+    public function test decrement(): void
     {
-        $this->assertEquals(1, $this->couple->getQuantity());
+        static::assertEquals(1, $this->couple->getQuantity());
         $this->couple->decrement();
-        $this->assertEquals(0, $this->couple->getQuantity());
+        static::assertEquals(0, $this->couple->getQuantity());
     }
 
     /**
      * @throws NegativeQuantityException
      */
-    public function test decrement fail()
+    public function test decrement fail(): void
     {
         $this->expectException(NegativeQuantityException::class);
         $this->couple->setQuantity(0);
         $this->couple->decrement();
     }
 
-    public function test increment()
+    public function test increment(): void
     {
-        $this->assertEquals(1, $this->couple->getQuantity());
+        static::assertEquals(1, $this->couple->getQuantity());
         $this->couple->increment();
-        $this->assertEquals(2, $this->couple->getQuantity());
+        static::assertEquals(2, $this->couple->getQuantity());
     }
 
-    public function test plus()
+    public function test plus(): void
     {
-        $this->assertEquals(1, $this->couple->getQuantity());
+        static::assertEquals(1, $this->couple->getQuantity());
         $this->couple->plus(5);
-        $this->assertEquals(6, $this->couple->getQuantity());
+        static::assertEquals(6, $this->couple->getQuantity());
     }
 
     /**
      * @throws NegativeQuantityException
      */
-    public function test minus()
+    public function test minus(): void
     {
         $this->couple->setQuantity(5);
         $this->couple->minus(3);
-        $this->assertEquals(2, $this->couple->getQuantity());
+        static::assertEquals(2, $this->couple->getQuantity());
     }
 
     /**
      * @throws NegativeQuantityException
      */
-    public function test minus fail()
+    public function test minus fail(): void
     {
         $this->expectException(NegativeQuantityException::class);
         $this->couple->minus(3);
